@@ -1,0 +1,6 @@
+node_modules
+packages/one/node_modules
+datapulser/web_app/node_modules
+packages/ui/node_modules
+packages/components/node_modules
+datapulser/data-sync/node_modules
