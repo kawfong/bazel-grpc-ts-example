@@ -2,9 +2,9 @@
   "name": "tpt",
   "private": true,
   "workspaces": [
+    "packages/*"
   ],
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
     "http-server": "^14.1.1",
     "node-gyp": "^9.3.1",
@@ -20,6 +20,9 @@
   },
   "devDependencies": {
     "@bazel/ibazel": "0.16.2",
+    "@bufbuild/protobuf": "1.6.0",
+    "@bufbuild/protoc-gen-connect-es": "0.13.0",
+    "@bufbuild/protoc-gen-es": "1.6.0",
     "eslint": "8.28.0",
     "ts-jest": "29.0.3",
     "tslib": "^2.4.1",

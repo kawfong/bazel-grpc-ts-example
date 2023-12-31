@@ -1,0 +1,17 @@
+load("@aspect_rules_ts//ts:proto.bzl", "ts_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "helloworld_proto",
+    srcs = glob(["**/*.proto"]),
+    deps = ["@com_google_protobuf//:any_proto"],
+)
+
+ts_proto_library(
+    # name of resulting ts_proto_library target
+    name = "ts_hello_world_pb_library",
+    files_to_copy = [],
+    # Label pointing to the linked node_modules target where @bufbuild/protoc-gen-es is linked, e.g
+    node_modules = "//:node_modules",
+    proto = "helloworld_proto",
+)

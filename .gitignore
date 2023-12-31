@@ -5,3 +5,4 @@ node_modules
 bazel-bin
 bazel-testlogs
 bazel-bazel-grpc-ts-example
+.ijwb
