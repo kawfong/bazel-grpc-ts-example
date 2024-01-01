@@ -1,0 +1,14 @@
+{
+  "name": "proto",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "@bufbuild/protobuf": "1.6.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "ts-loader": "9.5.1",
+    "webpack": "5.89.0",
+    "webpack-cli": "5.1.4"
+  }
+}
