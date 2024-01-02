@@ -116,18 +116,28 @@ load("@npm//:repositories.bzl", "npm_repositories")
 npm_repositories()
 
 http_archive(
-    name = "aspect_rules_webpack",
-    sha256 = "21a85849d01eebbd0cb0a5c0120eb58e4d3275eda68565918e7c0d84e14d30d9",
-    strip_prefix = "rules_webpack-0.13.0",
-    url = "https://github.com/aspect-build/rules_webpack/releases/download/v0.13.0/rules_webpack-v0.13.0.tar.gz",
+    name = "aspect_rules_swc",
+    sha256 = "8eb9e42ed166f20cacedfdb22d8d5b31156352eac190fc3347db55603745a2d8",
+    strip_prefix = "rules_swc-1.1.0",
+    url = "https://github.com/aspect-build/rules_swc/releases/download/v1.1.0/rules_swc-v1.1.0.tar.gz",
 )
 
-#######################
-# rules_webpack setup #
-#######################
+###################
+# rules_swc setup #
+###################
 
-# Fetch the Bazel module dependencies
+# Fetches the rules_swc dependencies.
+# If you want to have a different version of some dependency,
+# you should fetch it *before* calling this.
+# Alternatively, you can skip calling this function, so long as you've
+# already fetched all the dependencies.
+load("@aspect_rules_swc//swc:dependencies.bzl", "rules_swc_dependencies")
 
-load("@aspect_rules_webpack//webpack:dependencies.bzl", "rules_webpack_dependencies")
+rules_swc_dependencies()
 
-rules_webpack_dependencies()
+load("@aspect_rules_swc//swc:repositories.bzl", "LATEST_SWC_VERSION", "swc_register_toolchains")
+
+swc_register_toolchains(
+    name = "swc",
+    swc_version = LATEST_SWC_VERSION,
+)
