@@ -17,7 +17,7 @@
     "baseUrl": ".",
     "module": "CommonJS",
     "paths": {
-      "@/auto_gen/*": ["../proto/*"]
+      "@/auto_gen/*": ["../proto/*", "../bazel-bin/proto/*"]
     }
   },
   "include": ["**/*.ts"],

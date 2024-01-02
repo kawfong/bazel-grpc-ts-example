@@ -10,7 +10,7 @@ proto_library(
 ts_proto_library(
     # name of resulting ts_proto_library target
     name = "ts_hello_world_pb_library",
-    #    copy_files = False,
+    copy_files = False,
     # Label pointing to the linked node_modules target where @bufbuild/protoc-gen-es is linked, e.g
     node_modules = "//:node_modules",
     proto = "helloworld_proto",
