@@ -1,0 +1,7 @@
+{
+  "name": "@bazel-grpc-ts-example/proto",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+  }
+}

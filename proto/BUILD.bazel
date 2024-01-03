@@ -1,5 +1,10 @@
 load("@aspect_rules_ts//ts:proto.bzl", "ts_proto_library")
+load("@aspect_rules_js//npm:defs.bzl", "npm_package")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_config", "ts_project")
 load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+
+npm_link_all_packages(name = "node_modules")
 
 proto_library(
     name = "helloworld_proto",
@@ -9,10 +14,46 @@ proto_library(
 
 ts_proto_library(
     # name of resulting ts_proto_library target
-    name = "ts_hello_world_pb_library",
-    copy_files = False,
+    name = "hello_world_ts_proto_library",
+    #    copy_files = False,
     # Label pointing to the linked node_modules target where @bufbuild/protoc-gen-es is linked, e.g
     node_modules = "//:node_modules",
     proto = "helloworld_proto",
+    visibility = ["//visibility:public"],
+)
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    visibility = ["//proto:__subpackages__"],
+)
+
+ts_project(
+    name = "hello_world_ts_project",
+    srcs = ["index.ts"],
+    allow_js = True,
+    # runtime direct dependencies of the linked npm package
+    data = [
+    ],
+    declaration = True,
+    resolve_json_module = True,
+    transpiler = "tsc",
+    tsconfig = ":tsconfig",
+    visibility = ["//visibility:public"],
+    # transpile time direct dependencies
+    deps = [
+        ":hello_world_ts_proto_library",
+    ],
+)
+
+# make this library available via node_modules
+npm_package(
+    name = "proto",
+    srcs = [
+        "package.json",
+        ":hello_world_ts_project",
+    ],
+    # This is a perf improvement; the default will be flipped to False in rules_js 2.0
+    include_runfiles = False,
     visibility = ["//visibility:public"],
 )

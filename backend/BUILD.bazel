@@ -21,23 +21,19 @@ ts_project(
     allow_js = True,
     # runtime direct dependencies of the linked npm package
     data = [
-        "//proto:ts_hello_world_pb_library",
     ],
     declaration = True,
     resolve_json_module = True,
-    transpiler = partial.make(
-        swc,
-        swcrc = ".swcrc",
-    ),
+    transpiler = "tsc",
     tsconfig = ":tsconfig",
     # transpile time direct dependencies
     deps = [
+        ":node_modules/@bazel-grpc-ts-example/proto",
         ":node_modules/@connectrpc/connect",
         ":node_modules/@connectrpc/connect-express",
         ":node_modules/@connectrpc/connect-node",
         ":node_modules/@types/express",
         ":node_modules/express",
-        "//proto:ts_hello_world_pb_library",
     ],
 )
 

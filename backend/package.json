@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@bazel-grpc-ts-example/proto": "workspace:*",
     "@connectrpc/connect": "1.2.0",
     "@connectrpc/connect-express": "1.2.0",
     "@connectrpc/connect-node": "1.2.0",

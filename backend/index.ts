@@ -1,9 +1,9 @@
 import {
     HelloReply,
     HelloRequest,
-} from '@/auto_gen/helloworld_pb';
+    GreeterService
+} from '@bazel-grpc-ts-example/proto';
 
-import {GreeterService} from '@/auto_gen/helloworld_connect';
 import { ConnectRouter } from "@connectrpc/connect";
 import http from "http";
 import express from "express";
@@ -18,7 +18,7 @@ const routes = (router: ConnectRouter) =>
                 message: `Hello again, ${req.name}!`,
             });
         },
-        async sayHelloAgain(req) {
+        async sayHelloAgain(req: HelloRequest) {
             return new HelloReply({
                 message: `Hello again, ${req.name}!`,
             });
