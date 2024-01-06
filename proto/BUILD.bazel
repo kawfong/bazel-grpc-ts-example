@@ -46,6 +46,28 @@ ts_project(
     ],
 )
 
+webpack_bundle(
+    name = "basic",
+    srcs = [
+        "index.ts",
+        "package.json",
+        "tsconfig.json",
+        ":node_modules/@bufbuild/protobuf",
+    ],
+    chdir = "proto",
+    data = [
+        ":node_modules/@bufbuild/protobuf",
+    ],
+    node_modules = ":node_modules",
+    output_dir = True,
+    webpack_config = ":webpack.config.cjs",
+    deps = [
+        ":node_modules/@bufbuild/protobuf",
+        ":node_modules/ts-loader",
+        ":ts_hello_world_pb_library",
+    ],
+)
+
 # make this library available via node_modules
 npm_package(
     name = "proto",

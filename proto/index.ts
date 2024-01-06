@@ -1,2 +1,2 @@
-export * from './helloworld_connect';
-export * from './helloworld_pb';
+export {GreeterService} from '@/helloworld_connect';
+export {HelloReply, HelloRequest} from '@/helloworld_pb';
