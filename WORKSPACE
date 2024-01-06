@@ -20,6 +20,17 @@ load("@buildifier_prebuilt//:deps.bzl", "buildifier_prebuilt_deps")
 buildifier_prebuilt_deps()
 
 http_archive(
+    name = "aspect_rules_webpack",
+    sha256 = "21a85849d01eebbd0cb0a5c0120eb58e4d3275eda68565918e7c0d84e14d30d9",
+    strip_prefix = "rules_webpack-0.13.0",
+    url = "https://github.com/aspect-build/rules_webpack/releases/download/v0.13.0/rules_webpack-v0.13.0.tar.gz",
+)
+
+load("@aspect_rules_webpack//webpack:dependencies.bzl", "rules_webpack_dependencies")
+
+rules_webpack_dependencies()
+
+http_archive(
     name = "rules_proto_grpc",
     sha256 = "928e4205f701b7798ce32f3d2171c1918b363e9a600390a25c876f075f1efc0a",
     strip_prefix = "rules_proto_grpc-4.4.0",
@@ -95,11 +106,11 @@ load("@aspect_rules_jest//jest:dependencies.bzl", "rules_jest_dependencies")
 
 rules_jest_dependencies()
 
-load("@rules_nodejs//nodejs:repositories.bzl", "nodejs_register_toolchains")
+load("@rules_nodejs//nodejs:repositories.bzl", "DEFAULT_NODE_VERSION", "nodejs_register_toolchains")
 
 nodejs_register_toolchains(
     name = "nodejs",
-    node_version = "18.17.0",
+    node_version = DEFAULT_NODE_VERSION,
 )
 
 load("@aspect_rules_js//npm:npm_import.bzl", "npm_translate_lock")

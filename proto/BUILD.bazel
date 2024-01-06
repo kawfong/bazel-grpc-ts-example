@@ -3,6 +3,7 @@ load("@aspect_rules_js//npm:defs.bzl", "npm_package")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_config", "ts_project")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@aspect_rules_webpack//webpack:defs.bzl", "webpack_bundle")
 
 npm_link_all_packages(name = "node_modules")
 
@@ -15,7 +16,7 @@ proto_library(
 ts_proto_library(
     # name of resulting ts_proto_library target
     name = "hello_world_ts_proto_library",
-    #    copy_files = False,
+    copy_files = False,
     # Label pointing to the linked node_modules target where @bufbuild/protoc-gen-es is linked, e.g
     node_modules = "//:node_modules",
     proto = "helloworld_proto",
@@ -62,9 +63,9 @@ webpack_bundle(
     output_dir = True,
     webpack_config = ":webpack.config.cjs",
     deps = [
+        ":hello_world_ts_proto_library",
         ":node_modules/@bufbuild/protobuf",
         ":node_modules/ts-loader",
-        ":ts_hello_world_pb_library",
     ],
 )
 
