@@ -1,7 +1,7 @@
 {
-  "name": "@bazel-grpc-ts-example/proto",
+  "name": "proto",
   "private": true,
-  "main": "index.js",
+  "main": "basic/index.js",
   "dependencies": {
     "@bufbuild/protobuf": "1.6.0"
   },

@@ -24,6 +24,11 @@ module.exports = (_env, options) => {
                     test: /\.ts$/,
                     exclude: /node_modules/,
                     use: ["ts-loader"]
+                },
+                {
+                    test: /\.d.ts$/,
+                    exclude: /node_modules/,
+                    use: ["ts-loader"]
                 }
             ]
         }

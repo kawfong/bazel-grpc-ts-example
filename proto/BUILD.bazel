@@ -53,11 +53,9 @@ webpack_bundle(
         "index.ts",
         "package.json",
         "tsconfig.json",
-        ":node_modules/@bufbuild/protobuf",
     ],
     chdir = "proto",
     data = [
-        ":node_modules/@bufbuild/protobuf",
     ],
     node_modules = ":node_modules",
     output_dir = True,
@@ -74,7 +72,7 @@ npm_package(
     name = "proto",
     srcs = [
         "package.json",
-        ":hello_world_ts_project",
+        ":basic",
     ],
     # This is a perf improvement; the default will be flipped to False in rules_js 2.0
     include_runfiles = False,
