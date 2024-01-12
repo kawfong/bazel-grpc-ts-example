@@ -32,7 +32,6 @@ js_binary(
     data = [
         "package.json",
         ":frontend_ts",
-        ":node_modules/proto",
     ],
     entry_point = "index.js",
 )

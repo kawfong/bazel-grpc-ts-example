@@ -2,23 +2,6 @@ workspace(name = "bazel_monorepo")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_jar")
 
-######################
-# GOLANG SUPPORT
-######################
-
-http_archive(
-    name = "buildifier_prebuilt",
-    sha256 = "29a50ea545810dc077c408d520eb83e9de3eecfe6395e89cb07149d903fc31e5",
-    strip_prefix = "buildifier-prebuilt-6.1.2",
-    urls = [
-        "http://github.com/keith/buildifier-prebuilt/archive/6.1.2.tar.gz",
-    ],
-)
-
-load("@buildifier_prebuilt//:deps.bzl", "buildifier_prebuilt_deps")
-
-buildifier_prebuilt_deps()
-
 http_archive(
     name = "aspect_bazel_lib",
     sha256 = "bda4a69fa50411b5feef473b423719d88992514d259dadba7d8218a1d02c7883",
@@ -55,30 +38,6 @@ rules_proto_dependencies()
 
 rules_proto_toolchains()
 
-######################
-# OTHER
-######################
-
-protobuf_version = "3.19.4"
-
-protobuf_version_sha256 = "3bd7828aa5af4b13b99c191e8b1e884ebfa9ad371b0ce264605d347f135d2568"
-
-# requirement of 'com_github_bazelbuild_buildtools'
-http_archive(
-    name = "com_google_protobuf",
-    sha256 = protobuf_version_sha256,
-    strip_prefix = "protobuf-%s" % protobuf_version,
-    url = "https://github.com/protocolbuffers/protobuf/archive/v%s.tar.gz" % protobuf_version,
-)
-
-load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
-
-protobuf_deps()
-
-##################
-# rules_ts setup #
-##################
-
 http_archive(
     name = "aspect_rules_js",
     sha256 = "a2f941e27f02e84521c2d47fd530c66d57dd6d6e44b4a4f1496fe304851d8e48",
@@ -93,13 +52,6 @@ http_archive(
     url = "https://github.com/aspect-build/rules_ts/releases/download/v2.1.0/rules_ts-v2.1.0.tar.gz",
 )
 
-http_archive(
-    name = "aspect_rules_jest",
-    sha256 = "d3bb833f74b8ad054e6bff5e41606ff10a62880cc99e4d480f4bdfa70add1ba7",
-    strip_prefix = "rules_jest-0.18.4",
-    url = "https://storage.googleapis.com/public-bazel-artifacts/js/rules_jest-v0.18.4.tar.gz",
-)
-
 load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
 
 rules_js_dependencies()
@@ -107,10 +59,6 @@ rules_js_dependencies()
 load("@aspect_rules_ts//ts:repositories.bzl", "rules_ts_dependencies")
 
 rules_ts_dependencies(ts_version_from = "//:package.json")
-
-load("@aspect_rules_jest//jest:dependencies.bzl", "rules_jest_dependencies")
-
-rules_jest_dependencies()
 
 load("@aspect_rules_js//npm:npm_import.bzl", "npm_translate_lock")
 
@@ -154,17 +102,6 @@ rules_ts_dependencies(
 load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
 
 rules_js_dependencies()
-
-http_archive(
-    name = "bazel_features",
-    sha256 = "b8789c83c893d7ef3041d3f2795774936b27ff61701a705df52fd41d6ddbf692",
-    strip_prefix = "bazel_features-1.2.0",
-    url = "https://github.com/bazel-contrib/bazel_features/releases/download/v1.2.0/bazel_features-v1.2.0.tar.gz",
-)
-
-load("@bazel_features//:deps.bzl", "bazel_features_deps")
-
-bazel_features_deps()
 
 # Fetch and register node, if you haven't already
 load("@rules_nodejs//nodejs:repositories.bzl", "DEFAULT_NODE_VERSION", "nodejs_register_toolchains")
