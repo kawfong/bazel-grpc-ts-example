@@ -16,7 +16,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "baseUrl": ".",
-    "module": "CommonJS",
     "paths": {
       "@/*": ["./*", "../bazel-bin/proto/*"]
     }

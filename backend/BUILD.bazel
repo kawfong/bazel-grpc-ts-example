@@ -5,7 +5,6 @@ load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_config", "ts_project")
 load("@aspect_rules_js//js:defs.bzl", "js_binary", "js_image_layer", "js_library", "js_run_binary")
 load("@bazel_skylib//lib:partial.bzl", "partial")
-load("@aspect_rules_swc//swc:defs.bzl", "swc")
 
 npm_link_all_packages(name = "node_modules")
 
@@ -40,7 +39,9 @@ ts_project(
 js_binary(
     name = "backend_server",
     data = [
+        "package.json",
         ":backend_ts",
+        ":node_modules/proto",
     ],
     entry_point = "index.js",
 )
