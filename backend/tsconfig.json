@@ -15,7 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "baseUrl": ".",
-    "module": "CommonJS",
+    "module": "ESNext",
     "paths": {
       "@/auto_gen/*": ["../proto/*", "../bazel-bin/proto/*"]
     }

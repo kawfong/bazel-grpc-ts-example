@@ -4,6 +4,7 @@ load("@aspect_rules_ts//ts:defs.bzl", "ts_config", "ts_project")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@aspect_rules_webpack//webpack:defs.bzl", "webpack_bundle")
+load("@aspect_rules_js//js:defs.bzl", "js_library")
 
 npm_link_all_packages(name = "node_modules")
 
@@ -28,51 +29,42 @@ ts_config(
     src = "tsconfig.json",
     visibility = ["//proto:__subpackages__"],
 )
+#
+#ts_project(
+#    name = "hello_world_ts_project",
+#    srcs = ["index.d.ts"],
+#    allow_js = True,
+#    # runtime direct dependencies of the linked npm package
+#    data = [
+#    ],
+#    declaration = True,
+#    resolve_json_module = True,
+#    transpiler = "tsc",
+#    tsconfig = ":tsconfig",
+#    visibility = ["//visibility:public"],
+#    # transpile time direct dependencies
+#    deps = [
+#        ":hello_world_ts_proto_library",
+#    ],
+#)
 
-ts_project(
-    name = "hello_world_ts_project",
-    srcs = ["index.ts"],
-    allow_js = True,
-    # runtime direct dependencies of the linked npm package
-    data = [
-    ],
-    declaration = True,
-    resolve_json_module = True,
-    transpiler = "tsc",
-    tsconfig = ":tsconfig",
-    visibility = ["//visibility:public"],
-    # transpile time direct dependencies
-    deps = [
-        ":hello_world_ts_proto_library",
-    ],
-)
-
-webpack_bundle(
-    name = "basic",
-    srcs = [
-        "index.ts",
-        "package.json",
-        "tsconfig.json",
-    ],
-    chdir = "proto",
-    data = [
-    ],
-    node_modules = ":node_modules",
-    output_dir = True,
-    webpack_config = ":webpack.config.cjs",
-    deps = [
-        ":hello_world_ts_proto_library",
-        ":node_modules/@bufbuild/protobuf",
-        ":node_modules/ts-loader",
-    ],
-)
+#js_library(
+#    name = "hello_world_js_library",
+#    srcs = [
+#        "helloworld_connect.d.ts",
+#        "helloworld_pb.d.ts",
+#        "index.ts",
+#    ],
+#    visibility = ["//visibility:public"],
+#)
 
 # make this library available via node_modules
 npm_package(
     name = "proto",
     srcs = [
+        "index.d.ts",
         "package.json",
-        ":basic",
+        ":hello_world_ts_proto_library",
     ],
     # This is a perf improvement; the default will be flipped to False in rules_js 2.0
     include_runfiles = False,

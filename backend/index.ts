@@ -2,7 +2,7 @@ import {
     HelloReply,
     HelloRequest,
     GreeterService
-} from '@bazel-grpc-ts-example/proto';
+} from 'proto';
 
 import { ConnectRouter } from "@connectrpc/connect";
 import http from "http";

@@ -1,7 +1,7 @@
 {
   "name": "proto",
   "private": true,
-  "main": "basic/index.js",
+  "types": "index.d.ts",
   "dependencies": {
     "@bufbuild/protobuf": "1.6.0"
   },

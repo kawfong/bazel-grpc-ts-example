@@ -4,7 +4,7 @@ module.exports = (_env, options) => {
     return {
         target: 'node',
         entry: {
-            index: path.resolve(__dirname, "index.ts"),
+            index: path.resolve(__dirname, "index.d.ts"),
         },
         output: {
             path: path.resolve(__dirname, "dist"),

@@ -28,12 +28,12 @@ ts_project(
     tsconfig = ":tsconfig",
     # transpile time direct dependencies
     deps = [
-        ":node_modules/@bazel-grpc-ts-example/proto",
         ":node_modules/@connectrpc/connect",
         ":node_modules/@connectrpc/connect-express",
         ":node_modules/@connectrpc/connect-node",
         ":node_modules/@types/express",
         ":node_modules/express",
+        ":node_modules/proto",
     ],
 )
 
