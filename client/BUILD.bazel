@@ -3,12 +3,14 @@
 ####################
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_config", "ts_project")
+load("@aspect_rules_js//js:defs.bzl", "js_binary", "js_image_layer", "js_library", "js_run_binary")
 
 npm_link_all_packages(name = "node_modules")
 
 ts_project(
     name = "frontend_ts",
     srcs = ["index.ts"],
+    allow_js = True,
     # runtime direct dependencies of the linked npm package
     data = [
     ],
@@ -18,6 +20,19 @@ ts_project(
     tsconfig = "//:tsconfig",
     # transpile time direct dependencies
     deps = [
-        ":node_modules/@grpc/grpc-js",
+        ":node_modules/@connectrpc/connect",
+        ":node_modules/@connectrpc/connect-node",
+        ":node_modules/@types/node",
+        ":node_modules/proto",
     ],
+)
+
+js_binary(
+    name = "client",
+    data = [
+        "package.json",
+        ":frontend_ts",
+        ":node_modules/proto",
+    ],
+    entry_point = "index.js",
 )

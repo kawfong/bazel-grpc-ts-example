@@ -1,1 +1,1 @@
-# WIP
+# bazel-grpc-ts-example

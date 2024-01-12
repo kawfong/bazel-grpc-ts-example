@@ -22,12 +22,6 @@ ts_proto_library(
     visibility = ["//visibility:public"],
 )
 
-ts_config(
-    name = "tsconfig",
-    src = "tsconfig.json",
-    visibility = ["//proto:__subpackages__"],
-)
-
 ts_project(
     name = "hello_world_ts_project",
     srcs = ["index.ts"],
@@ -38,7 +32,7 @@ ts_project(
     declaration = True,
     resolve_json_module = True,
     transpiler = "tsc",
-    tsconfig = ":tsconfig",
+    tsconfig = "//:tsconfig",
     visibility = ["//visibility:public"],
     # transpile time direct dependencies
     deps = [

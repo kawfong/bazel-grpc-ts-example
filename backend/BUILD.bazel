@@ -8,12 +8,6 @@ load("@bazel_skylib//lib:partial.bzl", "partial")
 
 npm_link_all_packages(name = "node_modules")
 
-ts_config(
-    name = "tsconfig",
-    src = "tsconfig.json",
-    visibility = ["//backend:__subpackages__"],
-)
-
 ts_project(
     name = "backend_ts",
     srcs = ["index.ts"],
@@ -24,7 +18,7 @@ ts_project(
     declaration = True,
     resolve_json_module = True,
     transpiler = "tsc",
-    tsconfig = ":tsconfig",
+    tsconfig = "//:tsconfig",
     # transpile time direct dependencies
     deps = [
         ":node_modules/@connectrpc/connect",
@@ -41,7 +35,6 @@ js_binary(
     data = [
         "package.json",
         ":backend_ts",
-        ":node_modules/proto",
     ],
     entry_point = "index.js",
 )
